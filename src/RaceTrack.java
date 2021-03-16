@@ -6,7 +6,8 @@ public class RaceTrack implements Obstructive{
     }
 
     @Override
-    public void overcome(Overcomable oc) {
-        oc.run();
+    public boolean overcome(Overcomable oc) {
+        System.out.println("Препятствие : беговая дорожка длиной " + length);
+        return oc.run(length);
     }
 }

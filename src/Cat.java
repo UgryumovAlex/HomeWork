@@ -3,26 +3,41 @@ public class Cat implements Overcomable {
     private String breed;
     private int age;
 
-    public Cat(String breed, int age) {
+    private double maxJumpHeight;
+    private double maxRunLength;
+    private double distanceRun;
+
+
+    public Cat(String breed, int age, double maxJumpHeight, double maxRunLength) {
         this.breed = breed;
         this.age = age;
-    }
-
-    public String getBreed() {
-        return breed;
-    }
-
-    public int getAge() {
-        return age;
+        this.maxJumpHeight = maxJumpHeight;
+        this.maxRunLength = maxRunLength;
+        distanceRun = 0;
     }
 
     @Override
-    public void jump() {
-        System.out.println("Cat of " + breed + " age " + age + " jump");
+    public boolean jump(double jumpHeight) {
+        if (maxJumpHeight >= jumpHeight) {
+            System.out.println("прыгнул " + jumpHeight);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
-    public void run() {
-        System.out.println("Cat of " + breed + " age " + age + " run");
+    public boolean run(double runLength) {
+        if ( (distanceRun += runLength) <= maxRunLength) {
+            System.out.println("пробежал " + runLength);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public void printInfo() {
+        System.out.println("Кот породы " + breed + " возраст " + age);
     }
 }

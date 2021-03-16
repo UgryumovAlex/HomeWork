@@ -1,3 +1,3 @@
 public interface Runnable {
-    void run();
+    boolean run(double runLength);
 }

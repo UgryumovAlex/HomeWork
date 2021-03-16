@@ -5,9 +5,9 @@ public class Wall implements Obstructive{
         this.height = height;
     }
 
-
     @Override
-    public void overcome(Overcomable oc) {
-        oc.jump();
+    public boolean overcome(Overcomable oc) {
+        System.out.println("Препятствие : стена высотой " + height);
+        return oc.jump(height);
     }
 }

@@ -3,27 +3,40 @@ public class Robot implements Overcomable{
     private String model;
     private double power;
 
-    public Robot(String model, double power) {
+    private double maxJumpHeight;
+    private double maxRunLength;
+
+
+    public Robot(String model, double power, double maxJumpHeight, double maxRunLength) {
         this.model = model;
         this.power = power;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public double getPower() {
-        return power;
+        this.maxJumpHeight = maxJumpHeight;
+        this.maxRunLength = maxRunLength;
     }
 
     @Override
-    public void jump() {
-        System.out.println("Robot " + model + " power = " + power + "kW jump");
+    public boolean jump(double jumpHeight) {
+        if (maxJumpHeight >= jumpHeight) {
+            System.out.println("прыгнул " + jumpHeight);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
-    public void run() {
-        System.out.println("Robot " + model + " power = " + power + "kW run");
-
+    public boolean run(double runLength) {
+        if (maxRunLength >= runLength) {
+            System.out.println("пробежал " + runLength);
+            return true;
+        } else {
+            return false;
+        }
     }
+
+    @Override
+    public void printInfo() {
+        System.out.println("Робот " + model + " мощность = " + power + " кВт");
+    }
+
 }

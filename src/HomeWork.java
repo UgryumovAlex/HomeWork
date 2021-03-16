@@ -11,30 +11,40 @@
  * 4.* У препятствий есть длина (для дорожки) или высота (для стены), а участников ограничения на бег и прыжки.
  *     Если участник не смог пройти одно из препятствий, то дальше по списку он препятствий не идет.
  *
- * 5.* Задача с перечислениями, закреплено в материалах к уроку
  * */
 public class HomeWork {
     public static void main(String[] args) {
-        System.out.println("Java, уровень 2, домашняя работа");
 
         //Участники
         Overcomable[] participants = {
-                new Human("Alexey", 43),
-                new Cat("Scottish straight", 8),
-                new Robot("Defender 500", 1500)
+                new Human("Alexey", 43, 2.5, 2000),
+                new Cat("Scottish straight", 8, 2, 1000),
+                new Robot("Defender-500K", 1500, 10, 10000)
         };
 
         //Препятствия
         Obstructive[] obstacles = {
-                new Wall(2.5),
-                new RaceTrack(1500),
-                new Wall(3.2)
+                new Wall(1.9),
+                new RaceTrack(100),
+                new Wall(1.2),
+                new RaceTrack(1000),
+                new Wall(2.4),
+                new RaceTrack(1000)
         };
 
         for (Overcomable participant : participants) { //Перебираем всех участников гонки героев
-            for (Obstructive obstacle : obstacles) {
-                obstacle.overcome(participant);
+            System.out.println("На старте участник соревнований :");
+            participant.printInfo();
+            for (Obstructive obstacle : obstacles) { //препятствия гонки
+                if (!obstacle.overcome(participant)) {
+                    System.out.println("участник не осилил препятствие и завершил гонку");
+                    break; //участник не осилил препятствие, прекращает дальнейшее движение
+                }
+                if (obstacle == obstacles[obstacles.length-1]) {
+                    System.out.println("участник успешно прошёл все препятствия и завершил гонку");
+                }
             }
+            System.out.println("");
         }
     }
 }
