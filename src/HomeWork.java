@@ -17,25 +17,42 @@
 public class HomeWork {
 
     public static void main(String[] args) {
-        System.out.println("Java, уровень 2, домашняя работа №2");
 
-        String[][] strArr = {
-                              {"Весна", "Лето", "Осень", "Зима"},
-                              {"Азия", "Европа", "Америка", "Африка"},
-                              {"Футбол", "Хоккей", "Баскетбол", "Воллейбол"},
-                              {"Конь", "Слон", "Ладья", "Ферзь"}
+        /*  Некорректная размерность
+        String[][] intArr = {
+                                {"1", "11", "111", "1111"},
+                                {"2", "22", "222", "2222"},
+                                {"3",  "333", "3333"},
+                                {"4", "44", "444", "4444"}
+                             };
+        */
+
+        /* Некорректное значение в ячейке
+        String[][] intArr = {
+                                {"1", "11", "111", "1111"},
+                                {"2", "2B2", "222", "2222"},
+                                {"3", "33", "333", "3333"},
+                                {"4", "44", "444", "4444"}
+                             };
+        */
+
+        String[][] intArr = {
+                                {"1", "11", "111", "1111"},
+                                {"2", "22", "222", "2222"},
+                                {"3", "33", "333", "3333"},
+                                {"4", "44", "444", "4444"}
                              };
         try {
-            int arrayRes = calcArray(strArr);
-            System.out.println(arrayRes);
+            System.out.println("Сумма элементов массива : " + calcArray(intArr));
         } catch (MyArraySizeException e) {
             System.out.println(e.getMessage());
+        } catch (MyArrayDataException e) {
+            System.out.println("Некорректное значение в ячейке ["+(e.getCellX()+1)+"]["+(e.getCellY()+1)+"] = " +
+                                intArr[e.getCellX()][e.getCellY()]);
         }
-
-
     }
 
-    private static int calcArray(String[][] strArr) throws MyArraySizeException {
+    private static int calcArray(String[][] strArr) throws MyArraySizeException, MyArrayDataException {
         //Проверяем размерность входящего массива
         if (strArr.length != 4) {
             throw new MyArraySizeException("Количество строк массива не равно 4");
@@ -46,8 +63,19 @@ public class HomeWork {
                 }
             }
         }
-        System.out.println("Размерность массива корректная");
 
-        return 0; //Пока подсчёт элементов не реализован
+        //Перебираем все элементы, ищем сумму
+        int arraySum = 0;
+        for (int i=0; i < strArr.length; i++) {
+            for (int j=0; j < strArr[i].length; j++) {
+                try {
+                    arraySum += Integer.parseInt(strArr[i][j]);
+                } catch (NumberFormatException e) {
+                    throw new MyArrayDataException(i, j);
+                }
+            }
+        }
+
+        return arraySum;
     }
 }
