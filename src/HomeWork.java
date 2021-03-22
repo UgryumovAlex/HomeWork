@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+
 /**
 1. Создать массив с набором слов (10-20 слов, должны встречаться повторяющиеся). Найти и вывести список уникальных слов,
    из которых состоит массив (дубликаты не считаем). Посчитать сколько раз встречается каждое слово.
@@ -13,6 +16,34 @@
  */
 public class HomeWork {
     public static void main(String[] args) {
-        System.out.println("Java, уровень 2, домашняя работа №3");
+        System.out.println("Задание №1");
+        task1();
+
+        System.out.println("\nЗадание №2");
+        PhoneBook phoneBook = new PhoneBook();
+
+        phoneBook.add("Путин", "8-912-820-1111");
+        phoneBook.add("Путин", "8-912-820-2222");
+        phoneBook.add("Путин", "8-912-820-3333");
+        phoneBook.add("Шойгу",    "8-935-817-1111");
+        phoneBook.add("Шойгу",    "8-935-817-1111"); //Пробуем добавить дубль номера
+        phoneBook.add("Лавров",  "8-912-820-9999");
+
+        System.out.println("Путин : " + phoneBook.get("Путин"));
+        System.out.println("Шойгу : " + phoneBook.get("Шойгу"));
+        System.out.println("Лавров : " + phoneBook.get("Лавров"));
+        System.out.println("Байден : " + phoneBook.get("Байден"));
+    }
+
+    static void task1() {
+        String[] words = {"Турция", "Египет", "Тайланд", "Египет", "Египет", "Египет","Танзания", "Абхазия",
+                          "Кипр", "Камбоджа", "Тайланд", "Крым", "Турция", "Испания"};
+        Map<String, Integer> trips = new HashMap<>();
+
+        for (String word : words) {
+            trips.put(word, trips.getOrDefault(word, 0) + 1);
+        }
+
+        System.out.println(trips);
     }
 }
